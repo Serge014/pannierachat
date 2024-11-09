@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  function incrementQuantity(event) {
+  function addQuantity(event) {
     const product = event.target.closest(".card-body");
     const quantityEl = product.querySelector(".quantity");
     let quantity = parseInt(quantityEl.textContent);
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentTotalEl.textContent = currentTotal + " $";
   }
 
-  function decrementQuantity(event) {
+  function removeQuantity(event) {
     const product = event.target.closest(".card-body");
     const quantityEl = product.querySelector(".quantity");
     let quantity = parseInt(quantityEl.textContent);
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function removeProduct(event) {
+  function deleteProduct(event) {
     const product = event.target.closest(".card-body");
     const quantity = parseInt(product.querySelector(".quantity").textContent);
     const unitPrice = parseInt(product.querySelector(".unit-price").textContent.replace(" $", ""));
@@ -51,15 +51,15 @@ document.addEventListener("DOMContentLoaded", function () {
     product.remove();
   }
 
-  function toggleFavorite(event) {
+  function favorite(event) {
     event.target.classList.toggle("liked"); // Bascule l'état favori
   }
 
   // Attacher les événements pour chaque produit
   document.querySelectorAll(".card-body").forEach((product) => {
-    product.querySelector(".fa-plus-circle").addEventListener("click", incrementQuantity);
-    product.querySelector(".fa-minus-circle").addEventListener("click", decrementQuantity);
-    product.querySelector(".fa-trash-alt").addEventListener("click", removeProduct);
-    product.querySelector(".fa-heart").addEventListener("click", toggleFavorite);
+    product.querySelector(".fa-plus-circle").addEventListener("click", addQuantity);
+    product.querySelector(".fa-minus-circle").addEventListener("click", removeQuantity);
+    product.querySelector(".fa-trash-alt").addEventListener("click", deleteProduct);
+    product.querySelector(".fa-heart").addEventListener("click", favorite);
   });
 });
